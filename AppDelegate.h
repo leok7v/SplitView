@@ -8,10 +8,6 @@
 
 @class WeightSplitViewDelegate;
 
-@interface AppDelegate : NSObject {
-    IBOutlet NSSplitView* splitView;
-    WeightSplitViewDelegate* splitViewDelegate;
-//  IBOutlet NSWindow *mainWindow; // this is unnecessary because splitView.window is good enough (LK)
-}
+@interface AppDelegate : NSObject<NSApplicationDelegate>
 
 @end

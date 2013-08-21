@@ -11,6 +11,8 @@
 			<string key="NS.object.0">3084</string>
 		</object>
 		<array key="IBDocument.IntegratedClassDependencies">
+			<string>NSButton</string>
+			<string>NSButtonCell</string>
 			<string>NSCustomObject</string>
 			<string>NSCustomView</string>
 			<string>NSMenu</string>
@@ -1115,14 +1117,46 @@
 									<string key="NSFrameSize">{233, 515}</string>
 									<reference key="NSSuperview" ref="125060758"/>
 									<reference key="NSWindow"/>
+									<reference key="NSNextKeyView" ref="505561322"/>
 									<string key="NSClassName">FlatColorView</string>
 								</object>
 								<object class="NSCustomView" id="505561322">
 									<reference key="NSNextResponder" ref="125060758"/>
 									<int key="NSvFlags">268</int>
+									<array class="NSMutableArray" key="NSSubviews">
+										<object class="NSButton" id="683893246">
+											<reference key="NSNextResponder" ref="505561322"/>
+											<int key="NSvFlags">301</int>
+											<string key="NSFrame">{{184, 240}, {63, 32}}</string>
+											<reference key="NSSuperview" ref="505561322"/>
+											<reference key="NSWindow"/>
+											<string key="NSReuseIdentifierKey">_NS:9</string>
+											<bool key="NSEnabled">YES</bool>
+											<object class="NSButtonCell" key="NSCell" id="492674359">
+												<int key="NSCellFlags">67108864</int>
+												<int key="NSCellFlags2">134217728</int>
+												<string key="NSContents">Flip</string>
+												<object class="NSFont" key="NSSupport">
+													<string key="NSName">LucidaGrande</string>
+													<double key="NSSize">13</double>
+													<int key="NSfFlags">16</int>
+												</object>
+												<string key="NSCellIdentifier">_NS:9</string>
+												<reference key="NSControlView" ref="683893246"/>
+												<int key="NSButtonFlags">-2038284288</int>
+												<int key="NSButtonFlags2">129</int>
+												<string key="NSAlternateContents"/>
+												<string key="NSKeyEquivalent"/>
+												<int key="NSPeriodicDelay">200</int>
+												<int key="NSPeriodicInterval">25</int>
+											</object>
+											<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
+										</object>
+									</array>
 									<string key="NSFrame">{{242, 0}, {421, 515}}</string>
 									<reference key="NSSuperview" ref="125060758"/>
 									<reference key="NSWindow"/>
+									<reference key="NSNextKeyView" ref="415696135"/>
 									<string key="NSClassName">FlatColorView</string>
 								</object>
 								<object class="NSCustomView" id="415696135">
@@ -1137,12 +1171,14 @@
 							<string key="NSFrameSize">{906, 515}</string>
 							<reference key="NSSuperview" ref="439893737"/>
 							<reference key="NSWindow"/>
+							<reference key="NSNextKeyView" ref="912210025"/>
 							<bool key="NSIsVertical">YES</bool>
 						</object>
 					</array>
 					<string key="NSFrameSize">{906, 515}</string>
 					<reference key="NSSuperview"/>
 					<reference key="NSWindow"/>
+					<reference key="NSNextKeyView" ref="125060758"/>
 				</object>
 				<string key="NSScreenRect">{{0, 0}, {1920, 1178}}</string>
 				<string key="NSMinSize">{368, 122}</string>
@@ -1696,19 +1732,27 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
-						<string key="label">splitView</string>
-						<reference key="source" ref="261876400"/>
-						<reference key="destination" ref="125060758"/>
-					</object>
-					<int key="connectionID">458</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
 						<string key="label">mainWindow</string>
 						<reference key="source" ref="261876400"/>
 						<reference key="destination" ref="972006081"/>
 					</object>
 					<int key="connectionID">461</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">flip:</string>
+						<reference key="source" ref="261876400"/>
+						<reference key="destination" ref="683893246"/>
+					</object>
+					<int key="connectionID">464</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">sv</string>
+						<reference key="source" ref="261876400"/>
+						<reference key="destination" ref="125060758"/>
+					</object>
+					<int key="connectionID">465</int>
 				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -2592,12 +2636,28 @@
 					<object class="IBObjectRecord">
 						<int key="objectID">453</int>
 						<reference key="object" ref="505561322"/>
+						<array class="NSMutableArray" key="children">
+							<reference ref="683893246"/>
+						</array>
 						<reference key="parent" ref="125060758"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">456</int>
 						<reference key="object" ref="261876400"/>
 						<reference key="parent" ref="0"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">462</int>
+						<reference key="object" ref="683893246"/>
+						<array class="NSMutableArray" key="children">
+							<reference ref="492674359"/>
+						</array>
+						<reference key="parent" ref="505561322"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">463</int>
+						<reference key="object" ref="492674359"/>
+						<reference key="parent" ref="683893246"/>
 					</object>
 				</array>
 			</object>
@@ -2721,6 +2781,8 @@
 				<string key="452.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="453.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="456.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="462.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="463.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="5.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="56.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="57.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -2742,21 +2804,32 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">461</int>
+			<int key="maxID">465</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
 				<object class="IBPartialClassDescription">
 					<string key="className">AppDelegate</string>
 					<string key="superclassName">NSObject</string>
+					<object class="NSMutableDictionary" key="actions">
+						<string key="NS.key.0">flip:</string>
+						<string key="NS.object.0">id</string>
+					</object>
+					<object class="NSMutableDictionary" key="actionInfosByName">
+						<string key="NS.key.0">flip:</string>
+						<object class="IBActionInfo" key="NS.object.0">
+							<string key="name">flip:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+					</object>
 					<object class="NSMutableDictionary" key="outlets">
-						<string key="NS.key.0">splitView</string>
+						<string key="NS.key.0">sv</string>
 						<string key="NS.object.0">NSSplitView</string>
 					</object>
 					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<string key="NS.key.0">splitView</string>
+						<string key="NS.key.0">sv</string>
 						<object class="IBToOneOutletInfo" key="NS.object.0">
-							<string key="name">splitView</string>
+							<string key="name">sv</string>
 							<string key="candidateClassName">NSSplitView</string>
 						</object>
 					</object>

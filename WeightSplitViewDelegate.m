@@ -13,7 +13,6 @@
 @interface WeightSplitViewDelegate() {
     NSMutableDictionary* _minSize; // int view index -> float minimum size
     NSMutableDictionary* _p2ix;  // float priority -> int view index
-    NSSize _lastSeenSize;
 }
 @end
 
@@ -33,6 +32,12 @@
     _p2ix[@(ix)] = @(priorityIndex);
 }
 
+
+- (void) flip: (NSSplitView*) sv {
+    sv.vertical = !sv.isVertical;
+    [self layout: sv];
+    sv.needsDisplay = true;
+}
 
 - (void) splitViewDidResizeSubviews: (NSNotification*) n {
     [self saveSplitSubviewSizes: n.object];
@@ -64,20 +69,23 @@
     return sv.isVertical ? size.width : size.height;
 }
 
+// 3 split subvies sizes won't make sense for 2 split subview. orientation matters too
+- (NSString*) key: (NSSplitView* ) sv {
+    return [NSString stringWithFormat: @"%@.%ld.%@", kSplitSubviewsSizes, sv.subviews.count,
+            sv.isVertical ? @"v" : @"h"];
+}
+
 - (void) saveSplitSubviewSizes: (NSSplitView*) sv {
     NSMutableArray* sss = [NSMutableArray arrayWithCapacity: sv.subviews.count];
     int k = 0;
     for (NSView* v in sv.subviews) {
         sss[k++] = @(sv.isVertical ? v.frame.size.width : v.frame.size.height);
     }
-    NSString* key = [NSString stringWithFormat: @"%@.%ld", kSplitSubviewsSizes, sv.subviews.count];
-    [NSUserDefaults.standardUserDefaults  setObject: sss forKey: key];
+    [NSUserDefaults.standardUserDefaults  setObject: sss forKey: [self key: sv]];
 }
 
-- (void) initialLayout: (NSSplitView*) sv  {
-    // 3 split subvies sizes won't make sense for 2 split subview
-    NSString* key = [NSString stringWithFormat: @"%@.%ld", kSplitSubviewsSizes, sv.subviews.count];
-    NSArray* sss = [NSUserDefaults.standardUserDefaults objectForKey: key];
+- (void) layout: (NSSplitView*) sv  {
+    NSArray* sss = [NSUserDefaults.standardUserDefaults objectForKey: [self key: sv]];
     // it direction of a splitter has been changed from initial .nib layout we need to relayout all views.
     CGFloat total = 0;
     int i = 0;
@@ -102,13 +110,10 @@
         i++;
     }
     NSLog(@"%f %@", offset - divider, NSStringFromRect(sv.bounds));
+    [self saveSplitSubviewSizes: sv];
 }
 
 - (void) splitView: (NSSplitView*) sv resizeSubviewsWithOldSize: (NSSize) oldSize {
-    if (_lastSeenSize.width == 0 && _lastSeenSize.height == 0) {
-        [self initialLayout: sv];
-    }
-    _lastSeenSize = oldSize;
     CGFloat delta = sv.isVertical ? sv.bounds.size.width - oldSize.width : sv.bounds.size.height - oldSize.height;
     NSLog(@"delta=%f %@ old=%@", delta, NSStringFromSize(sv.bounds.size), NSStringFromSize(oldSize));
     NSArray* sorted = [_p2ix.allKeys sortedArrayUsingComparator: ^ NSComparisonResult(id o0, id o1) {

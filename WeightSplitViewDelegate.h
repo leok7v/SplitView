@@ -13,5 +13,7 @@
 
 - (void) setMinimumLength: (CGFloat) minLength forViewAtIndex: (NSInteger) viewIndex;
 - (void) setPriority: (CGFloat) priorityIndex forViewAtIndex: (NSInteger) viewIndex;
+- (void) layout: (NSSplitView*) sv;
+- (void) flip: (NSSplitView*) sv;
 
 @end
